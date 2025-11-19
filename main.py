@@ -1,6 +1,7 @@
-import pygame
 import random
 from typing import Optional
+
+import pygame
 
 # Konstanta dasar
 WIDTH, HEIGHT = 800, 480
@@ -20,6 +21,7 @@ MAX_BALL_VY = 7.5  # batas vertikal agar tidak terlalu curam
 
 FIELD_RECT = pygame.Rect(0, 0, WIDTH, HEIGHT)
 
+
 def reset_ball(ball, to_right: Optional[bool] = None):
     ball.center = (WIDTH // 2, HEIGHT // 2)
     # Tentukan arah horizontal bola
@@ -33,11 +35,13 @@ def reset_ball(ball, to_right: Optional[bool] = None):
     vx = dir_x * BALL_SPEED
     return vx, vy
 
+
 def clamp_paddle(rect: pygame.Rect):
     if rect.top < 0:
         rect.top = 0
     if rect.bottom > HEIGHT:
         rect.bottom = HEIGHT
+
 
 def draw_center_line(surface):
     dash_h = 14
@@ -48,6 +52,7 @@ def draw_center_line(surface):
         pygame.draw.rect(surface, GREY, (x, y, 2, dash_h))
         y += dash_h + gap
 
+
 def main():
     pygame.init()
     pygame.display.set_caption("Pong AI - Pygame")
@@ -56,8 +61,12 @@ def main():
 
     # Objek permainan
     player = pygame.Rect(20, HEIGHT // 2 - PADDLE_H // 2, PADDLE_W, PADDLE_H)
-    ai = pygame.Rect(WIDTH - 20 - PADDLE_W, HEIGHT // 2 - PADDLE_H // 2, PADDLE_W, PADDLE_H)
-    ball = pygame.Rect(WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE)
+    ai = pygame.Rect(
+        WIDTH - 20 - PADDLE_W, HEIGHT // 2 - PADDLE_H // 2, PADDLE_W, PADDLE_H
+    )
+    ball = pygame.Rect(
+        WIDTH // 2 - BALL_SIZE // 2, HEIGHT // 2 - BALL_SIZE // 2, BALL_SIZE, BALL_SIZE
+    )
 
     # Kecepatan bola
     ball_vx, ball_vy = reset_ball(ball)
@@ -157,6 +166,7 @@ def main():
         pygame.display.flip()
 
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
